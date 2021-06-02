@@ -1,37 +1,39 @@
-<?php 
-  include 'server.php';
+<?php
+include 'server.php';
 
-  if(isset($_GET['edit'])){
+if (isset($_GET['edit'])) {
 
-  	$id =$_GET['edit'];
-  	$status=true;
-    $sql="select * from tb_crud where id='$id'";
-    $results=mysqli_query($db,$sql);
-    while($rows = mysqli_fetch_array($results)){
-         
-         $name=$rows['name'];
-         $tell=$rows['tell'];
-       
-    }
-  }
+	$id = $_GET['edit'];
+	$status = true;
+	$sql = "select * from tb_crud where id='$id'";
+	$results = mysqli_query($db, $sql);
+	while ($rows = mysqli_fetch_array($results)) {
 
- ?>
+		$name = $rows['name'];
+		$tell = $rows['tell'];
+	}
+	
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>create to crud</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
 
-	<?php 
-      
-      if(isset($_SESSION['img'])){
-        
-        echo "<div class='msg'>", $_SESSION['img'],"</div>";
-      }
-	 ?>
+	<?php
+
+	if (isset($_SESSION['img'])) {
+
+		echo "<div class='msg'>", $_SESSION['img'], "</div>";
+	}
+	?>
 
 	<table>
 		<thead>
@@ -43,17 +45,17 @@
 		</thead>
 		<tbody>
 
-			<?php 
-             while ($row= mysqli_fetch_array($result)) {
-			 ?>
-			<tr>
-				<td><?php echo  $row["name"]; ?></td>
-				<td><?php echo $row["tell"]; ?></td>
-				<td><a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a></td>
-				<td><a href="server.php?del=<?php echo $row['id']; ?>">Delete</a></td>
-			</tr>
+			<?php
+			while ($row = mysqli_fetch_array($result)) {
+			?>
+				<tr>
+					<td><?php echo  $row["name"]; ?></td>
+					<td><?php echo $row["tell"]; ?></td>
+					<td><a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a></td>
+					<td><a href="server.php?del=<?php echo $row['id']; ?>">Delete</a></td>
+				</tr>
 
-		<?php } ?>
+			<?php } ?>
 		</tbody>
 	</table>
 
@@ -69,17 +71,18 @@
 			<label>Tell:</label>
 			<input type="text" name="tell" value="<?php echo $tell; ?>">
 		</div>
-		<?php if ($status==false): ?>
-		<div class="input-grup">
-           <button type="submit" class="btn" name="save">Save</button>
-		</div>
-		<?php else: ?>
-		<div class="input-grup">
-           <button type="submit" class="btn" name="update">Update</button>
-		</div>
+		<?php if ($status == false) : ?>
+			<div class="input-grup">
+				<button type="submit" class="btn" name="save">Save</button>
+			</div>
+		<?php else : ?>
+			<div class="input-grup">
+				<button type="submit" class="btn" name="update">Update</button>
+			</div>
 		<?php endif ?>
 
 	</form>
 
 </body>
+
 </html>
